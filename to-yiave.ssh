@@ -1,0 +1,4 @@
+#ssh root@120.24.177.49
+#pass: Bukeuscumarket601
+
+sshpass -p "Bukeuscumarket601" ssh -o StrictHostKeyChecking=no  root@120.24.177.49
