@@ -1,5 +1,5 @@
 #ssh root@120.24.177.49
-#pass: Bukeuscumarket601
+#pass Terminal@207:
 
 
 connect(){
@@ -10,11 +10,12 @@ connect(){
 
 
 # 1. via /etc/hosts
-timeout 3 sshpass -p "111111" ssh -o StrictHostKeyChecking=no  root@$1
+# TODO: ssh -o BatchMode=yes
+sshpass -p "111111" ssh -o ConnectTimeout=3 -o StrictHostKeyChecking=no  root@$1
 
 # 2. general connect function
 if [ $? -ne 0 ]; then
-	timeout 3 sshpass -p "111111" ssh -o StrictHostKeyChecking=no  root@10.107.$1
+	sshpass -p "111111" ssh -o ConnectTimeout=3 -o StrictHostKeyChecking=no  root@10.107.$1
 fi
 
 #while getopts "u" arg
@@ -23,7 +24,7 @@ fi
 #		u)
 #			echo "-u:"
 #			if [ $optarg='root' ]; then
-#				connect Bukeuscumarket@601 root 
+#				connect Terminal@207 root 
 #			elif [ $optarg='max' ]; then
 #				echo "max"
 #			else
