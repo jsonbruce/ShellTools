@@ -18,3 +18,8 @@ fi
 if [ $? -ne 0 ]; then
 	sshpass -p "111111" ssh -o ConnectTimeout=3 -o StrictHostKeyChecking=no  root@10.107.$1
 fi
+
+# 3. general ssh connect
+if [ $? -ne 0 ]; then
+	ssh root@10.107.$1
+fi
