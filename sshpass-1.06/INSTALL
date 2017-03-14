@@ -102,7 +102,7 @@ for details on some of the pertinent environment variables.
 
    You can give `configure' initial values for configuration parameters
 by setting variables in the command line or in the environment.  Here
-is an example:
+s an example:
 
      ./configure CC=c99 CFLAGS=-g LIBS=-lposix
 
