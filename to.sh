@@ -2,11 +2,11 @@
 
 
 connect(){
-    sshpass -p $1 ssh -o StrictHostKeyChecking=no  $2@120.24.177.49
+    sshpass -p $1 ssh -o StrictHostKeyChecking=no  $2@$3
 }
 
 # 0. max@host
-ssh $1
+connect "xuhuan" max $1
 
 if [ $? -ne 0 ]; then
 # 1. via /etc/hosts
