@@ -57,6 +57,14 @@ echo 'export PATH=${JAVA_HOME}/bin:$PATH'  >> ~/.bashrc
 source ~/.bashrc
 
 # 3. unset openJDK
+
+update-alternatives --remove-all java
+update-alternatives --remove-all javac
+update-alternatives --remove-all jar
+update-alternatives --remove-all javah
+update-alternatives --remove-all javap
+
+
 update-alternatives --install /usr/bin/java java $JAVA_HOME/bin/java 300
 update-alternatives --install /usr/bin/javac javac $JAVA_HOME/bin/javac 300
 update-alternatives --install /usr/bin/jar jar $JAVA_HOME/bin/jar 300
