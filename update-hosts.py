@@ -19,6 +19,8 @@ def main(args):
     hosts = "/etc/hosts"
     hosts_bak = "/etc/hosts.bak"
     copyfile(hosts, hosts_bak)
+
+    is_update_available = False
     
     with open(hosts, "r") as fp:
         hosts_lines = fp.readlines()
@@ -39,6 +41,7 @@ def main(args):
 
         if old_version_ipv4 != new_version_ipv4:
             hosts_lines[ipv4_start + 1:ipv4_end] = ipv4_lines
+            is_update_available = True
 
         # IPv6 Update
         ipv6_url = "https://github.com/lennylxx/ipv6-hosts/raw/master/hosts"
@@ -56,15 +59,20 @@ def main(args):
 
         if old_version_ipv6 != new_version_ipv6:
             hosts_lines[ipv6_start + 1:ipv6_end] = ipv6_lines
+            is_update_available = True
 
 
-    with open("hosts", "r") as fp:
-        fp.writelines(hosts_lines)
-        
-        os.remove("ipv4")
-        os.remove("ipv6")
+    if is_update_available:
+        with open(hosts, "w") as fp:
+            fp.writelines(hosts_lines)
+            print("Hosts Updated Success!")
+    else:
+        print("Hosts not Updated.")
 
-        print("Hosts Updated Success!")
+    os.remove("ipv4")
+    os.remove("ipv6")
+
+
 
 
 if __name__ == "__main__":
