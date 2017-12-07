@@ -63,13 +63,13 @@ if [ -z `grep -q $JAVA_HOME_NAME $SHELL_PROFILE` ]; then
 	sed -i "s:^export ${JAVA_HOME_NAME}.*:export ${JAVA_HOME_NAME}=${JAVA_HOME}:" $SHELL_PROFILE
 else
 	echo "Init JAVA_HOME..."
-	echo export JAVA_HOME=$JAVA_HOME >> ~/.zshrc
-	echo 'export JRE_HOME=${JAVA_HOME}/jre'  >> ~/.zshrc
-	echo 'export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib' >> ~/.zshrc
-	echo 'export PATH=${JAVA_HOME}/bin:$PATH'  >> ~/.zshrc
+	echo export JAVA_HOME=$JAVA_HOME >> $SHELL_PROFILE
+	echo 'export JRE_HOME=${JAVA_HOME}/jre'  >> $SHELL_PROFILE
+	echo 'export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib' >> $SHELL_PROFILE
+	echo 'export PATH=${JAVA_HOME}/bin:$PATH'  >> $SHELL_PROFILE
 fi
 
-source ~/.zshrc
+source $SHELL_PROFILE
 
 
 # 3. unset openJDK and Older JDK
