@@ -10,6 +10,7 @@
 if [ -z $1 ];then
 	echo "Usage: deployShadowsocks.sh password"
 	exit 0
+fi
 
 # 0. Read ss pass from args
 SS_PASS=$1
