@@ -1,17 +1,35 @@
 #!/bin/bash
 
 JDK_FILE=""
-JDK_HOME=/usr/lib/java
+JDK_HOME=/usr/local/lib/java
 JAVA_HOME_NAME="JAVA_HOME"
-SHELL_PROFILE=~/.zshrc
+SHELL_PROFILE="$HOME"/.zshrc
+
+USAGE="
+Usage: $0 [OPTIONS]
+
+Deploy Java in Single Node.
+
+-f     JDK File
+-d     JDK Home
+"
 
 # Usage
 if [ -z $1 ]; then
-	echo -e "Usage: deployJava -f jdkfile -d jdkhome"
+	printf "%s\\n" "$USAGE"
 	exit 0
-else
-	echo $0 $*
 fi
+
+printf "Welcome to Java Deploy\\n"
+
+# Shell Profile Detect
+if [ `echo $SHELL` = "/bin/bash" ]; then
+	SHELL_PROFILE="$HOME"/.bashrc
+elif [ `echo $SHELL` = "/usr/bin/zsh" ]; then
+	SHELL_PROFILE="$HOME"/.zshrc
+fi
+
+echo "Shell Profile=$SHELL_PROFILE"
 
 
 # 0. read args
@@ -21,11 +39,11 @@ do
 		f)
 			JDK_FILE=$OPTARG
 			test ! -e $JDK_FILE && echo "Error: File $JDK_FILE do not exit!" && exit 0
-			echo "f's arg: $OPTARG"
+			#echo "JDK File is: $OPTARG"
 			;;
 		d)
 		    JDK_HOME=$OPTARG	
-			echo "d's arg: $OPTARG"
+			#echo "JDK Home is: $OPTARG"
 			;;
 		?)
 			echo "unknow arg"
@@ -58,15 +76,15 @@ done
 
 echo "JAVA_HOME="$JAVA_HOME
 
-if [ -z `grep -q $JAVA_HOME_NAME $SHELL_PROFILE` ]; then
+if grep -q $JAVA_HOME_NAME $SHELL_PROFILE; then
 	echo "Replace JAVA_HOME..."
 	sed -i "s:^export ${JAVA_HOME_NAME}.*:export ${JAVA_HOME_NAME}=${JAVA_HOME}:" $SHELL_PROFILE
 else
 	echo "Init JAVA_HOME..."
-	echo export JAVA_HOME=$JAVA_HOME >> $SHELL_PROFILE
-	echo 'export JRE_HOME=${JAVA_HOME}/jre'  >> $SHELL_PROFILE
-	echo 'export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib' >> $SHELL_PROFILE
-	echo 'export PATH=${JAVA_HOME}/bin:$PATH'  >> $SHELL_PROFILE
+	echo "export ${JAVA_HOME_NAME}=$JAVA_HOME" >> $SHELL_PROFILE
+	echo "export JRE_HOME=${JAVA_HOME}/jre"  >> $SHELL_PROFILE
+	echo "export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib" >> $SHELL_PROFILE
+	echo "export PATH=${JAVA_HOME}/bin:$PATH"  >> $SHELL_PROFILE
 fi
 
 source $SHELL_PROFILE
