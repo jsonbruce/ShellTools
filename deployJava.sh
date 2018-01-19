@@ -1,7 +1,7 @@
 #!/bin/bash
 
 JDK_FILE=""
-JDK_HOME=/usr/local/lib/java
+JDK_HOME="/usr/local/lib/java"
 JAVA_HOME_NAME="JAVA_HOME"
 SHELL_PROFILE="$HOME"/.zshrc
 
@@ -82,9 +82,9 @@ if grep -q $JAVA_HOME_NAME $SHELL_PROFILE; then
 else
 	echo "Init JAVA_HOME..."
 	echo "export ${JAVA_HOME_NAME}=$JAVA_HOME" >> $SHELL_PROFILE
-	echo "export JRE_HOME=${JAVA_HOME}/jre"  >> $SHELL_PROFILE
-	echo "export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib" >> $SHELL_PROFILE
-	echo "export PATH=${JAVA_HOME}/bin:$PATH"  >> $SHELL_PROFILE
+	echo 'export JRE_HOME=${JAVA_HOME}/jre'  >> $SHELL_PROFILE
+	echo 'export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib' >> $SHELL_PROFILE
+	echo 'export PATH=${JAVA_HOME}/bin:$PATH'  >> $SHELL_PROFILE
 fi
 
 source $SHELL_PROFILE
@@ -105,4 +105,4 @@ update-alternatives --install /usr/bin/javap javap $JAVA_HOME/bin/javap 1
 
 
 # 4. complete
-echo "Java Deploy Completed!"
+printf "Java Deploy Completed!\n\n"

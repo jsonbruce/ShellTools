@@ -1,17 +1,37 @@
 #!/bin/bash
 
 SCALA_FILE=""
-SCALA_HOME=/usr/lib/scala
+SCALA_HOME="/usr/local/lib/scala"
 SCALA_HOME_NAME="SCALA_HOME"
-SHELL_PROFILE=~/.zshrc
+SHELL_PROFILE="$HOME"/.zshrc
+
+USAGE="
+Usage: $0 [OPTIONS]
+
+Deploy Scala in Single Node.
+
+-f     SCALA File
+-d     SCALA Home
+"
 
 # Usage
 if [ -z $1 ]; then
-	echo -e "Usage: deployScala -f scalafile -d scalahome"
+	printf "%s\\n" "$USAGE"
 	exit 0
-else
-	echo $0 $*
 fi
+
+printf "Welcome to Scala Deploy\\n"
+
+# Shell Profile Detect
+if [ `echo $SHELL` = "/bin/bash" ]; then
+	SHELL_PROFILE="$HOME"/.bashrc
+elif [ `echo $SHELL` = "/usr/bin/zsh" ]; then
+	SHELL_PROFILE="$HOME"/.zshrc
+fi
+
+echo "Shell Profile=$SHELL_PROFILE"
+
+
 
 # 0. read args
 while getopts "f:d:" arg
@@ -20,14 +40,11 @@ do
 		f)
 			SCALA_FILE=$OPTARG
 			test ! -e $SCALA_FILE && echo "Error: File $SCALA_FILE do not exit!" && exit 0
-			echo "f's arg: $OPTARG"
+			#echo "f's arg: $OPTARG"
 			;;
 		d)
-		    SCALA_HOME=$OPTARG	
-			if [ ! -d $SCALA_HOME ]; then
-				sudo mkdir $SCALA_HOME
-			fi
-			echo "d's arg: $OPTARG"
+		    SCALA_HOME=$OPTARG
+			#echo "d's arg: $OPTARG"
 			;;
 		?)
 			echo "unknow arg"
@@ -38,8 +55,6 @@ done
 
 
 # 1. untar
-
-# 1. untar
 if [ ! -d $SCALA_HOME ]; then
 	sudo mkdir $SCALA_HOME
 else
@@ -47,7 +62,7 @@ else
 	rm -rf $SCALA_HOME/*
 fi
 
-tar -zxvf $SCALA_FILE -C $SCALA_HOME
+tar -zxf $SCALA_FILE -C $SCALA_HOME
 
 
 # 2. set environment in ~/.zshrc [/etc/profile or ~/.bashrc]
@@ -62,7 +77,7 @@ done
 
 echo "SCALA_HOME=" $SCALA_HOME
 
-if [ -z `grep -q $SCALA_HOME_NAME $SHELL_PROFILE` ]; then
+if grep -q $SCALA_HOME_NAME $SHELL_PROFILE; then
 	echo "Replace SCALA_HOME..."
 	sed -i "s:^export ${SCALA_HOME_NAME}.*:export ${SCALA_HOME_NAME}=${SCALA_HOME}:" $SHELL_PROFILE
 else
@@ -87,4 +102,4 @@ update-alternatives --install /usr/bin/scaladoc scaladoc $SCALA_HOME/bin/scalado
 
 
 # 4. complete
-echo "Scala Deploy Completed!"
+printf "Scala Deploy Completed!\n\n"
