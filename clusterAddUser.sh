@@ -26,7 +26,7 @@ NODES=$1
 USERNAME=$2
 PASSWORD=$3
 
-COMMAND="useradd -m -G root,sudo $USERNAME && echo '$USERNAME:$PASSWORD' | chpasswd"
+COMMAND="useradd -m -G root,sudo -s /bin/bash $USERNAME && echo '$USERNAME:$PASSWORD' | chpasswd"
 
 
 for node in $NODES;
