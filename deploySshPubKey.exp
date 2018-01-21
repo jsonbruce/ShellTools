@@ -1,0 +1,43 @@
+#!/usr/bin/expect
+# Copy your ssh pub key to another node.
+# Usage: expect deploySshPubKey.exp ip password
+# Note:
+# Although we can embed expect script to bash script via `expect -c`, we use the 
+# standalone expect script will makes whole scripts more readble and moduler.
+
+
+set USAGE "
+Usage: $argv0 ip password
+
+Deploy your SSH Public Key to another node.
+
+ip                  the IP or hostname of target node
+password            the password of target node
+
+"
+
+
+if {$argc < 2} {
+    send_user "$USAGE"
+    exit
+}
+
+
+set ip [lindex $argv 0]
+set password [lindex $argv 1]
+set timeout 60
+
+
+spawn ssh-copy-id root@$ip
+expect {
+	"(yes/no)?" {
+		send "yes\r"
+		exp_continue 
+	}
+	"password:" {
+		send "$password\r"
+	}
+}
+
+#interact
+expect eof

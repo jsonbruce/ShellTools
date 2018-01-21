@@ -19,7 +19,7 @@ jdk_file                    JDK File
 "
 
 # Usage
-if [ -z $1 ]; then
+if [ -z $3 ]; then
 	printf "%s\\n" "$USAGE"
 	exit 0
 fi

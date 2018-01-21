@@ -8,5 +8,20 @@ I need to connet(via ssh) each node of lab's' cluster.
 Shell on Linux, Tools best.
 
 
+# Cluster Configuration
+
+1. clusterDeployLocalSshPubKey
+2. clusterDeployClusterSshPubKey
+3. clusterChangeHostname
+4. clusterDeployHosts
+5. clusterAddUser
+
+
+# Cluster Develop Environment
+
+1. clusterDeployJava
+2. clusterDeployScala
+
+
 # LICENSE
 See [LICENSE](LICENSE) for more details.
