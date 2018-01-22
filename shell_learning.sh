@@ -25,18 +25,6 @@ do
 done
 
 
-# If-else
-for file in ./*
-do
-    if test -f $file
-    then
-        echo $file is File 
-    else
-        echo $file is Directory
-    fi
-done
-
-
 # Using grep Check file contains specific string.
 if [ `echo $SHELL` == "/bin/bash" ]; then
     SHELL_PROFILE="$HOME"/.bashrc
@@ -65,3 +53,15 @@ done
 printf "A\n"
 echo "B \n"
 echo "C"
+
+# Array
+if [ -f $1 ];then
+	nodes=`cat $1`
+else
+	nodes="$@"
+fi
+
+for node in $nodes 
+do
+	echo $node
+done
