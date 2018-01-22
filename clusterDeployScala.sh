@@ -33,5 +33,5 @@ do
 	printf "Deploy to $node ... \n"
 
 	scp $SCRIPT $SCALFILE root@$node:
-	ssh root@$node "bash $SCRIPT -f $SCALFILE -d /usr/local/lib/scala"
+	ssh root@$node "bash $SCRIPT -f $SCALFILE -d /usr/local/lib/scala && rm $SCRIPT $SCALFILE"
 done

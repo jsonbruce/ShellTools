@@ -33,5 +33,5 @@ do
 	printf "Deploy to $node ... \n"
 
 	scp $SCRIPT $JDKFILE root@$node:
-	ssh root@$node "bash $SCRIPT -f $JDKFILE -d /usr/local/lib/java"
+	ssh root@$node "bash $SCRIPT -f $JDKFILE -d /usr/local/lib/java && rm $SCRIPT $JDKFILE"
 done
