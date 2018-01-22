@@ -14,7 +14,9 @@ Shell on Linux, Tools best.
 2. clusterDeployClusterSshPubKey
 3. clusterChangeHostname
 4. clusterDeployHosts
-5. clusterAddUser
+5. clusterAddUser                     [Optional]
+6. clusterDeployZSH
+7. clusterDeployVim
 
 
 # Cluster Develop Environment

@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/home/max/Development/C/SDK-gcc-1.0'
+let g:netrw_dirhist_2='/etc/python'
+let g:netrw_dirhist_3='/home/max/.oh-my-zsh/themes'
+let g:netrw_dirhist_4='/home/max/Downloads/Brackets/extract/DEBIAN'
+let g:netrw_dirhist_5='/home/max/Documents'
+let g:netrw_dirhist_6='/home/max/Documents/Google'
+let g:netrw_dirhist_7='/home/max/Documents/Google/GoogleCodeJam'
+let g:netrw_dirhist_8='/home/max/.config/matplotlib'
