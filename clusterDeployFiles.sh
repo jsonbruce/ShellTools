@@ -8,17 +8,18 @@
 #!/bin/bash
 
 USAGE="
-Usage: $0 node_list_file file1 [file2 file3 ...]
+Usage: $0 node_list_file dst_dir file1 [file2 file3 ...]
 
 Deploy Files to each node in cluster.
 
 node_list_file                  a file. node name or ip per line
+dst_dir                         directory in node  to be deployed
 file[n]                         file or directory list seperated by blank
 
 "
 
 
-if [ -z $1 ]; then
+if [ -z $3 ]; then
 	printf "%s\\n" "$USAGE"
 	exit 0
 fi
@@ -27,12 +28,12 @@ fi
 USERNAME="root"
 
 NODES=`cat $1`
-
+DST_DIR=$2
+shift 2
 FILES="$*"
-FILES=${FILES#${1}}
 
 
 for node in $NODES
 do
-	scp -r $FILES $USERNAME@$node:
+	scp -r $FILES $USERNAME@$node:$DST_DIR
 done
