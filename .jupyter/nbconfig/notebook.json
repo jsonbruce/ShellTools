@@ -2,40 +2,41 @@
   "keys": {
     "command": {
       "bind": {
-        "shift-d": "jupyter-notebook:move-cell-down", 
-        "shift-u": "jupyter-notebook:move-cell-up", 
+        "shift-d": "jupyter-notebook:move-cell-down",
+        "shift-u": "jupyter-notebook:move-cell-up",
         "d,d": "jupyter-notebook:delete-cell"
-      }, 
+      },
       "unbind": [
         "d,d"
       ]
     }
-  }, 
+  },
   "Cell": {
     "cm_config": {
       "lineNumbers": true
     }
-  }, 
+  },
   "load_extensions": {
-    "tree/main": true, 
-    "tree-tab/main": true, 
-    "toc2/main": true, 
-    "hinterland/hinterland": true, 
-    "tree_tab/main": true, 
-    "nbextensions_configurator/config_menu/main": true, 
-    "contrib_nbextensions_help_item/main": true, 
-    "codefolding/main": true, 
-    "python-markdown/main": true, 
-    "varInspector/main": true, 
-    "hide_input/main": true, 
-    "highlight_selected_word/main": true, 
-    "treetab/main": true, 
-    "hide_input_all/main": true, 
-    "code_prettify/code_prettify": true, 
-    "gist_it/main": true
-  }, 
+    "tree/main": true,
+    "tree-tab/main": true,
+    "toc2/main": true,
+    "hinterland/hinterland": true,
+    "tree_tab/main": true,
+    "nbextensions_configurator/config_menu/main": true,
+    "contrib_nbextensions_help_item/main": true,
+    "codefolding/main": true,
+    "python-markdown/main": true,
+    "varInspector/main": true,
+    "hide_input/main": true,
+    "highlight_selected_word/main": true,
+    "treetab/main": true,
+    "hide_input_all/main": true,
+    "code_prettify/code_prettify": true,
+    "gist_it/main": true,
+    "code_prettify/autopep8": true
+  },
   "Notebook": {
-    "Header": false, 
+    "Header": false,
     "Toolbar": true
   }
 }
