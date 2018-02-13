@@ -613,7 +613,8 @@ c.InteractiveShellApp.exec_lines = [
     "import pandas as pd",
     "import matplotlib as mpl",
     "import matplotlib.pyplot as plt",
-    "from pandas import Series, DataFrame"
+    "from pandas import Series, DataFrame",
+    "mpl.style.use('ggplot')"
 ]
 
 c.InteractiveShellApp.exec_lines.append(\
@@ -629,6 +630,7 @@ import pandas as pd\n\
 import matplotlib as mpl\n\
 import matplotlib.pyplot as plt\n\
 from pandas import Series, DataFrame\n\
+mpl.style.use("ggplot")\n\
     """)\
     '
 )
