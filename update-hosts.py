@@ -16,6 +16,8 @@ from shutil import copyfile
 
 
 def main(args):
+    print("Start Updating Hosts...")
+
     hosts = "/etc/hosts"
     hosts_bak = "/etc/hosts.bak"
     copyfile(hosts, hosts_bak)
