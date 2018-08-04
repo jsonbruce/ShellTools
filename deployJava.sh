@@ -20,7 +20,18 @@ if [ -z $1 ]; then
 	exit 0
 fi
 
-printf "Welcome to Java Deploy\\n"
+
+printf "Welcome to Java Deploy!\\n"
+if [ -z $3 ]; then
+	printf "Default install to $JDK_HOME [ENTER or Input] "
+	read value
+	if [ "$value"x = ""x ]; then
+		JDK_HOME=$JDK_HOME
+	else
+		JDK_HOME=$value
+	fi
+fi
+
 
 # Shell Profile Detect
 if [ `echo $SHELL` = "/bin/bash" ]; then
@@ -29,7 +40,7 @@ elif [ `echo $SHELL` = "/usr/bin/zsh" ]; then
 	SHELL_PROFILE="$HOME"/.zshrc
 fi
 
-echo "Shell Profile=$SHELL_PROFILE"
+echo -e "Shell Profile=$SHELL_PROFILE"
 
 
 # 0. read args
@@ -97,11 +108,11 @@ update-alternatives --remove-all jar
 update-alternatives --remove-all javah
 update-alternatives --remove-all javap
 
-update-alternatives --install /usr/bin/java java $JAVA_HOME/bin/java 1
-update-alternatives --install /usr/bin/javac javac $JAVA_HOME/bin/javac 1
-update-alternatives --install /usr/bin/jar jar $JAVA_HOME/bin/jar 1
-update-alternatives --install /usr/bin/javah javah $JAVA_HOME/bin/javah 1
-update-alternatives --install /usr/bin/javap javap $JAVA_HOME/bin/javap 1
+update-alternatives --install /usr/local/bin/java java $JAVA_HOME/bin/java 1
+update-alternatives --install /usr/local/bin/javac javac $JAVA_HOME/bin/javac 1
+update-alternatives --install /usr/local/bin/jar jar $JAVA_HOME/bin/jar 1
+update-alternatives --install /usr/local/bin/javah javah $JAVA_HOME/bin/javah 1
+update-alternatives --install /usr/local/bin/javap javap $JAVA_HOME/bin/javap 1
 
 
 # 4. complete
