@@ -109,6 +109,10 @@ alias zshsource="source ~/.oh-my-zsh"
 alias vimconfig="vim ~/.vimrc"
 alias tmuxconfig="vim ~/.tmux.conf"
 
+# alias - docker
+alias dip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
+
+
 # pip zsh completion start
 function _pip_completion {
   local words cword
@@ -144,3 +148,7 @@ export PATH=${JAVA_HOME}/bin:$PATH
 # Nodejs
 export NODEJS_HOME=/usr/local/lib/nodejs/node-v8.11.3
 export PATH=$NODEJS_HOME/bin:$PATH
+
+# Maven
+export MAVEN_HOME=/usr/local/lib/maven/apache-maven-3.5.4
+export PATH=$MAVEN_HOME/bin:$PATH
