@@ -104,7 +104,7 @@ export all_proxy="http://127.0.0.1:8123"
 
 # alias
 alias zshconfig="vim ~/.zshrc"
-alias zshsource="source ~/.oh-my-zsh"
+alias zshsource="source ~/.zshrc"
 
 alias vimconfig="vim ~/.vimrc"
 alias tmuxconfig="vim ~/.tmux.conf"
@@ -138,12 +138,20 @@ function _pip_completion {
 compctl -K _pip_completion pip3
 # pip3 zsh completion end
 
+# docker-compose completion
+fpath=(~/.zsh/completion $fpath)
+autoload -Uz compinit && compinit -i
+
 
 # Java
 export JAVA_HOME=/usr/local/lib/java/jdk1.8.0_181
 export JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
 export PATH=${JAVA_HOME}/bin:$PATH
+
+# Kotlin
+export KOTLIN_HOME=/usr/local/lib/kotlin/kotlinc
+export PATH=$KOTLIN_HOME/bin:$PATH
 
 # Nodejs
 export NODEJS_HOME=/usr/local/lib/nodejs/node-v8.11.3
@@ -152,3 +160,11 @@ export PATH=$NODEJS_HOME/bin:$PATH
 # Maven
 export MAVEN_HOME=/usr/local/lib/maven/apache-maven-3.5.4
 export PATH=$MAVEN_HOME/bin:$PATH
+
+# Gradle
+export GRADLE_HOME=/usr/local/lib/gradle/gradle-4.9
+export PATH=$GRADLE_HOME/bin:$PATH
+
+# Android
+export ANDROID_HOME=~/Develop/Android/Sdk
+export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH

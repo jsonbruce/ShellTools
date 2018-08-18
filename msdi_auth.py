@@ -22,6 +22,13 @@ import requests
 
 os.environ['no_proxy'] = ",10.219.2.25"
 
+# Config
+user_name = "MDI4OTI:"
+password = "eHVodWFuMTk5Mg::"
+deviceid = "90457"
+tokenkey = "27e7f032037670502c818d9d7bfde1a9"
+
+# Endpoint
 url = "http://10.219.2.25/a/ajax.php"
 url2 = "http://10.219.2.25/a/ajax.php?tradecode=mobileresult"
 
@@ -30,12 +37,12 @@ params = {'tradecode': 'net_auth',
           'NewMobile': 1} 
 params2 = {"tradecode": "mobileresult"}
 
-data = {'user_name': 'MDI4OTI:',
-        'password': 'eHVodWFuMTk5Mg::',
-	'deviceid': '90457',
+data = {'user_name': user_name,
+        'password': password,
+	'deviceid': deviceid, 
 	'saveuserpass': '1',
-	'tokenkey': '27e7f032037670502c818d9d7bfde1a9'}
-data2 = {'deviceid': '90457',
+	'tokenkey': tokenkey}
+data2 = {'deviceid': deviceid,
 	'itemsid': '',
 	'checkres': '',
 	'is_safecheck': '0',
