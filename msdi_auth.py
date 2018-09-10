@@ -13,11 +13,13 @@
 #
 # Usage: python3 msdi_auth.py
 #
+# v1.1.0  2018.09.10  Retrive deviceid automatically.
 # v1.0.0  2018.08.07  Portal Auth success for Single Accout in Single Device
 
 
 import os
 import sys
+import json
 import requests
 
 os.environ['no_proxy'] = "10.219.2.25"
@@ -31,12 +33,21 @@ tokenkey = "27e7f032037670502c818d9d7bfde1a9"
 # Endpoint
 url = "http://10.219.2.25/a/ajax.php"
 
-params = {'tradecode': 'net_auth',
+params0 = {'tradecode': 'getdeviceinfoprocess',
+          'gettype': 'ipgetmac'} 
+params1 = {'tradecode': 'net_auth',
           'type': 'User',
           'NewMobile': 1} 
 params2 = {"tradecode": "mobileresult"}
 
-data = {'user_name': user_name,
+data0 = {'newMobile': 1,
+        'is_guest': 0,
+        'os_platform': 'Linux',
+        'browser': 'Chrome/69.0.349',
+        'UrlAscid': '',
+        'UrlAswid': '',
+        'wechatid': 0}
+data1 = {'user_name': user_name,
         'password': password,
 	'deviceid': deviceid, 
 	'saveuserpass': '1',
@@ -69,9 +80,30 @@ def check():
 
 
 def auth():
-    response = requests.post(url, data, params=params, headers=headers)
+    global deviceid
+    global data1
+    global data2
+
+    # 1. Get DeviceID
+    response0 = requests.post(url, data0, params=params0, headers=headers)
+    if response0.ok:
+        d = response0.text.strip("'<>() _res=").replace('\'', '\"').replace("Boolean(false)", '"Boolean(false)"').replace("Boolean(true)", '"Boolean(true)"')
+        d = json.loads(d)
+        deviceid = d["DeviceID"]
+        print("DeviceID=", deviceid)
+    else:
+        print("MSDI Authenticated Failed!")
+        return
+
+    data1["deviceid"] = deviceid
+    data2["deviceid"] = deviceid
+
+    # 2. Auth
+    response1 = requests.post(url, data1, params=params1, headers=headers)
+
+    # 3. Submit
     response2 = requests.post(url, data2, params=params2, headers=headers)
-    if response.ok and response2.ok:
+    if response1.ok and response2.ok:
         print("MSDI Network Authenticated!")
     else:
         print("MSDI Authenticated Failed!")
