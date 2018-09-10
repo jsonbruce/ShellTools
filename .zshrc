@@ -168,3 +168,10 @@ export PATH=$GRADLE_HOME/bin:$PATH
 # Android
 export ANDROID_HOME=~/Develop/Android/Sdk
 export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH
+
+# CUDA
+export PATH=/usr/local/lib/cuda-9.0/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/lib/cuda-9.0/lib64:/usr/local/lib/cuda-9.0/extras/CUPTI/lib64:$LD_LIBRARY_PATH
+
+# Julia
+export PATH=/usr/local/lib/julia/julia-1.0.0/bin:$PATH

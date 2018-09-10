@@ -20,17 +20,16 @@ import os
 import sys
 import requests
 
-os.environ['no_proxy'] = ",10.219.2.25"
+os.environ['no_proxy'] = "10.219.2.25"
 
 # Config
 user_name = "MDI4OTI:"
 password = "eHVodWFuMTk5Mg::"
-deviceid = "90457"
+deviceid = "96328"
 tokenkey = "27e7f032037670502c818d9d7bfde1a9"
 
 # Endpoint
 url = "http://10.219.2.25/a/ajax.php"
-url2 = "http://10.219.2.25/a/ajax.php?tradecode=mobileresult"
 
 params = {'tradecode': 'net_auth',
           'type': 'User',
@@ -71,7 +70,7 @@ def check():
 
 def auth():
     response = requests.post(url, data, params=params, headers=headers)
-    response2 = requests.post(url2, data2, params=params2, headers=headers)
+    response2 = requests.post(url, data2, params=params2, headers=headers)
     if response.ok and response2.ok:
         print("MSDI Network Authenticated!")
     else:
