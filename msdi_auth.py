@@ -74,7 +74,7 @@ def check():
             return True
         else:
             return False
-    except requests.ConnectionError:
+    except Exception as e:
         return False
     return False
 
