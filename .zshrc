@@ -154,7 +154,7 @@ export KOTLIN_HOME=/usr/local/lib/kotlin/kotlinc
 export PATH=$KOTLIN_HOME/bin:$PATH
 
 # Nodejs
-export NODEJS_HOME=/usr/local/lib/nodejs/node-v8.11.3
+export NODEJS_HOME=/usr/local/lib/nodejs/node-v8.12.0
 export PATH=$NODEJS_HOME/bin:$PATH
 
 # Maven
