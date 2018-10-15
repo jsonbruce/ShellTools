@@ -115,36 +115,6 @@ alias tmuxconfig="vim ~/.tmux.conf"
 alias dip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
 
 
-# pip zsh completion start
-function _pip_completion {
-  local words cword
-  read -Ac words
-  read -cn cword
-  reply=( $( COMP_WORDS="$words[*]" \
-             COMP_CWORD=$(( cword-1 )) \
-             PIP_AUTO_COMPLETE=1 $words[1] ) )
-}
-compctl -K _pip_completion pip
-# pip zsh completion end
-
-
-# pip3 zsh completion start
-function _pip_completion {
-  local words cword
-  read -Ac words
-  read -cn cword
-  reply=( $( COMP_WORDS="$words[*]" \
-             COMP_CWORD=$(( cword-1 )) \
-             PIP_AUTO_COMPLETE=1 $words[1] ) )
-}
-compctl -K _pip_completion pip3
-# pip3 zsh completion end
-
-# docker-compose completion
-fpath=(~/.zsh/completion $fpath)
-autoload -Uz compinit && compinit -i
-
-
 # Java
 export JAVA_HOME=/usr/local/lib/java/jdk1.8.0_181
 export JRE_HOME=${JAVA_HOME}/jre
@@ -177,6 +147,40 @@ export LD_LIBRARY_PATH=/usr/local/lib/cuda-9.0/lib64:/usr/local/lib/cuda-9.0/ext
 
 # Julia
 export PATH=/usr/local/lib/julia/julia-1.0.0/bin:$PATH
+
+
+
+# pip zsh completion start
+function _pip_completion {
+  local words cword
+  read -Ac words
+  read -cn cword
+  reply=( $( COMP_WORDS="$words[*]" \
+             COMP_CWORD=$(( cword-1 )) \
+             PIP_AUTO_COMPLETE=1 $words[1] ) )
+}
+compctl -K _pip_completion pip
+# pip zsh completion end
+
+
+# pip3 zsh completion start
+function _pip_completion {
+  local words cword
+  read -Ac words
+  read -cn cword
+  reply=( $( COMP_WORDS="$words[*]" \
+             COMP_CWORD=$(( cword-1 )) \
+             PIP_AUTO_COMPLETE=1 $words[1] ) )
+}
+compctl -K _pip_completion pip3
+# pip3 zsh completion end
+
+
+# docker-compose completion
+fpath=(~/.zsh/completion $fpath)
+autoload -Uz compinit && compinit -i
+
+
 
 # Copyright 2016 The Kubernetes Authors.
 #
