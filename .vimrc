@@ -179,92 +179,134 @@ set formatoptions+=B
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "新建.c/.cpp/.h/.sh/.py/.java/.scala文件，自动插入文件头 
 
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.rb,*.java,*.py,*.scala exec ":call SetTitle()" 
+autocmd BufNewFile *.[ch],*.hpp,*.cpp,*.java,*.scala,*.sh,Makefile,*.mk,*.py,*.rb exec ":call SetTitle()" 
 
-func! SetTitle() 
-    "如果文件类型为脚本文件 
-    if expand("%:e") == "sh" || expand("%:e") == "py"
-        call setline(1,          "\#########################################################################") 
-        call append(line("."),   "\# --------->    FILE: ".expand("%")) 
-        call append(line(".")+1, "\# --------->    AUTHOR: Max Xu") 
-        call append(line(".")+2, "\# --------->    MAIL: xuhuan@live.cn") 
-        call append(line(".")+3, "\# --------->    DATE: ".strftime("%m/%d/%Y    TIME:%H:%M:%S"))
-        call append(line(".")+4, "\#########################################################################") 
-        call append(line(".")+5, "") 
-    else 
-        call setline(1,          "/*************************************************************************") 
-        call append(line("."),   " *  --------->    FILE: ".expand("%")) 
-        call append(line(".")+1, " *  --------->    AUTHOR: Max Xu") 
-        call append(line(".")+2, " *  --------->    MAIL: xuhuan@live.cn") 
-        call append(line(".")+3, " *  --------->    DATE: ".strftime("%m/%d/%Y    TIME:%H:%M:%S"))
-        call append(line(".")+4, " ************************************************************************/") 
-        call append(line(".")+5, "")
-    endif
 
-    if expand("%:e") == "c" || expand("%:e") == "cc"
-        call append(line(".")+6, "#include <stdio.h>")
-		call append(line(".")+7, "#include <stdlib.h>")
-		call append(line(".")+8, "")
-		call append(line(".")+9, "int main(void)")
-		call append(line(".")+10, "{")
-		call append(line(".")+11, "")
-		call append(line(".")+12, "}")
-    endif
+" Set Comment for .c, .h, .java, etc.
+func! SetComment()
+	call setline(1,"/*************************************************************************") 
+	call append(line("."),   "*   Copyright (C) ".strftime("%Y")." All rights reserved.")
+	call append(line(".")+1, "*   ") 
+	call append(line(".")+2, "*   FILE: ".expand("%:t")) 
+	call append(line(".")+3, "*   AUTHOR: Max Xu")
+	call append(line(".")+4, "*   MAIL: xuhuan@live.cn") 
+	call append(line(".")+5, "*   DATE: ".strftime("%m/%d/%Y    TIME:%H:%M:%S")) 
+	call append(line(".")+6, "*")
+	call append(line(".")+7, "*************************************************************************/") 
+	call append(line(".")+8, "")
+	call append(line(".")+9, "")
+endfunc
 
-    if expand("%:e") == "cpp" || expand("%:e") == "cxx"
-        call append(line(".")+6, "#include<iostream>")
-        call append(line(".")+7, "using namespace std;")
-        call append(line(".")+8, "")
-    endif
 
-    if expand("%:e") == "h" || expand("%:e") == "hh"
-		call append(line(".")+6, "#ifndef _".toupper(expand("%:r"))."_H")
-		call append(line(".")+7, "#define _".toupper(expand("%:r"))."_H")
-		call append(line(".")+8, "#endif")
-	endif
-
-	if expand("%:e") == "java"
-		call append(line(".")+6, "public class ".expand("%:r") ."{")
-		call append(line(".")+7, "")
-		call append(line(".")+8, "    public static void main(String " ."[" . "] args) {")
-		call append(line(".")+9, "      ")
-		call append(line(".")+10, "    }")
-		call append(line(".")+11, "}")
-	endif
-
-	if expand("%:e") == "scala"
-		call append(line(".")+6, "")
-		call append(line(".")+7, "")
-	endif
-
-    if expand("%:e") == "sh"
-        call append(line(".")+6, "\#!/bin/bash") 
-        call append(line(".")+7, "") 
-    endif
-
-	if expand("%:e") == "py"
-        call append(line(".")+6, "#!/usr/bin/env python")
-        call append(line(".")+7, "# coding=utf-8")
-	    call append(line(".")+8, "") 
-	    call append(line(".")+9, "import os") 
-	    call append(line(".")+10, "import sys") 
-	    call append(line(".")+11, "") 
-	    call append(line(".")+12, "") 
-	    call append(line(".")+13, "def main(args):") 
-	    call append(line(".")+14, "    pass") 
-	    call append(line(".")+15, "") 
-	    call append(line(".")+16, "") 
-	    call append(line(".")+17, "if __name__ == \"__main__\":") 
-	    call append(line(".")+18, "    main(sys.argv[1:])") 
-	endif
-
-    if expand("%:e") == "rb"
-        call setline(1,"#!/usr/bin/env ruby")
-        call append(line("."),"# encoding: utf-8")
-        call append(line(".")+1, "")
-    endif
-
+" Set Comment for .sh, .mk, .py, .rb, etc.
+func! SetCommentForScript()
+	call setline(4, "#########################################################################") 
+	call setline(5, "#   Copyright (C) ".strftime("%Y")." All rights reserved.")
+	call setline(6, "#   ") 
+	call setline(7, "#   FILE: ".expand("%:t")) 
+	call setline(8, "#   AUTHOR: Max Xu")
+	call setline(9, "#   MAIL: xuhuan@live.cn") 
+	call setline(10, "#   DATE: ".strftime("%m/%d/%Y    TIME:%H:%M:%S")) 
+	call setline(11, "#")
+	call setline(12, "#########################################################################")
+	call setline(13, "")
+	call setline(14, "")
 endfunc 
+
+
+func! SetTitle()
+	if &filetype == 'make' || expand("%:e") == "mk"
+		call setline(1, "") 
+		call setline(2, "")
+    call setline(3, "")
+		call SetCommentForScript()
+
+	elseif &filetype == 'sh' || expand("%:e") == "sh"
+		call setline(1, "#!/bin/bash") 
+		call setline(2, "")
+    call setline(3, "")
+		call SetCommentForScript()
+
+  elseif &filetype == 'python' || expand("%:e") == "py"
+    call setline(1, "#!/usr/bin/env python") 
+		call setline(2, "# coding=utf-8")
+    call setline(3, "")
+		call SetCommentForScript()
+    call setline(15, "import os") 
+    call setline(16, "import sys")
+    call setline(17, "") 
+    call setline(18, "") 
+    call setline(19, "def main(args):") 
+    call setline(20, "    pass") 
+    call setline(21, "") 
+    call setline(22, "") 
+    call setline(23, "if __name__ == \"__main__\":") 
+    call setline(24, "    main(sys.argv[1:])")  
+	
+  elseif &filetype == 'ruby' || expand("%:e") == "rb"
+    call setline(1,"#!/usr/bin/env ruby")
+    call setline(2,"# encoding: utf-8")
+    call setline(3, "")
+    call SetCommentForScript()
+  
+	else
+    call SetComment()
+    if expand("%:e") == 'hpp' 
+      call append(line(".")+10, "#ifndef _".toupper(expand("%:t:r"))."_H") 
+      call append(line(".")+11, "#define _".toupper(expand("%:t:r"))."_H") 
+      call append(line(".")+12, "#ifdef __cplusplus") 
+      call append(line(".")+13, "extern \"C\"") 
+      call append(line(".")+14, "{") 
+      call append(line(".")+15, "#endif") 
+      call append(line(".")+16, "") 
+      call append(line(".")+17, "#ifdef __cplusplus") 
+      call append(line(".")+18, "}") 
+      call append(line(".")+19, "#endif") 
+      call append(line(".")+20, "#endif //".toupper(expand("%:t:r"))."_H") 
+
+    elseif &filetype == 'cpp' || expand("%:e") == 'cpp' 
+      call append(line(".")+10, "#include<iostream>")
+      call append(line(".")+11, "#include \"".expand("%:t:r").".h\"") 
+      call append(line(".")+12, "using namespace std;")
+      call append(line(".")+13, "")
+      call append(line(".")+14, "int main(void)")
+		  call append(line(".")+15, "{")
+		  call append(line(".")+16, "")
+		  call append(line(".")+17, "}")
+
+    elseif expand("%:e") == "h" || expand("%:e") == "hh"
+      call append(line(".")+10, "#pragma once") 
+      call append(line(".")+11, "#ifndef _".toupper(expand("%:r"))."_H")
+  		call append(line(".")+12, "#define _".toupper(expand("%:r"))."_H")
+  		call append(line(".")+13, "#endif")
+
+    elseif &filetype == "c" || expand("%:e") == "c" || expand("%:e") == "cc"
+      call append(line(".")+10, "#include <stdio.h>")
+   		call append(line(".")+11, "#include <stdlib.h>")
+      call append(line(".")+12, "#include \"".expand("%:t:r").".h\"") 
+      call append(line(".")+13, "")
+		  call append(line(".")+14, "int main(void)")
+		  call append(line(".")+15, "{")
+		  call append(line(".")+16, "")
+		  call append(line(".")+17, "}")
+    
+    elseif &filetype == "java" || expand("%:e") == "java"
+      call append(line(".")+10, "public class ".expand("%:r") ."{")
+      call append(line(".")+11, "")
+      call append(line(".")+12, "    public static void main(String[] args) {")
+      call append(line(".")+13, "      ")
+      call append(line(".")+14, "    }")
+      call append(line(".")+15, "}")
+
+    elseif expand("%:e") == "scala"
+      call append(line(".")+10, "def main(args: Array[String]) {")
+      call append(line(".")+11, "}")
+
+    endif
+
+	endif
+endfunc
+
 "新建文件后，自动定位到文件末尾
 autocmd BufNewFile * normal G
 
