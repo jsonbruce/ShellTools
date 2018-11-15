@@ -11,7 +11,7 @@ Usage: $0 [OPTIONS]
 Deploy Java in Single Node.
 
 -f     JDK File
--d     JDK Home
+-d     JDK Home (Default to /usr/local/lib/java)
 "
 
 # Usage
