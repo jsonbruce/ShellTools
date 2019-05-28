@@ -1,10 +1,5 @@
 "==========================================
 " Author:  Max Xu
-" Version: 2.0
-" Email: xuhuan@mail.com
-" Blog: http://blog.csdn.net/ultimatestudio
-" ReadMe: README.md
-" Last_modify: 2014-01-14
 " Sections:
 "     ->General 基础设置
 "     ->Show 展示/排版等界面格式设置
@@ -134,9 +129,10 @@ set enc=utf-8
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 
 "禁止生成临时文件
-set nobackup              "不要生成备份文件
+set backupcopy=yes
+"set nobackup              "不要生成备份文件
 set noswapfile
-set history=2000          " history存储长度。
+"set history=2000          " history存储长度。
 
 "set autowrite      " Automatically save before commands like :next and :make
 set autoread        " Set to auto read when a file is changed from the outside"
@@ -190,7 +186,7 @@ func! SetComment()
 	call append(line(".")+2, "*   FILE: ".expand("%:t")) 
 	call append(line(".")+3, "*   AUTHOR: Max Xu")
 	call append(line(".")+4, "*   MAIL: xuhuan@live.cn") 
-	call append(line(".")+5, "*   DATE: ".strftime("%m/%d/%Y    TIME:%H:%M:%S")) 
+	call append(line(".")+5, "*   DATE: ".strftime("%Y.%m.%d %H:%M:%S")) 
 	call append(line(".")+6, "*")
 	call append(line(".")+7, "*************************************************************************/") 
 	call append(line(".")+8, "")
@@ -206,7 +202,7 @@ func! SetCommentForScript()
 	call setline(7, "#   FILE: ".expand("%:t")) 
 	call setline(8, "#   AUTHOR: Max Xu")
 	call setline(9, "#   MAIL: xuhuan@live.cn") 
-	call setline(10, "#   DATE: ".strftime("%m/%d/%Y    TIME:%H:%M:%S")) 
+	call setline(10, "#   DATE: ".strftime("%Y.%m.%d %H:%M:%S")) 
 	call setline(11, "#")
 	call setline(12, "#########################################################################")
 	call setline(13, "")
@@ -228,7 +224,7 @@ func! SetTitle()
 		call SetCommentForScript()
 
   elseif &filetype == 'python' || expand("%:e") == "py"
-    call setline(1, "#!/usr/bin/env python") 
+    call setline(1, "#!/usr/bin/env python3") 
 		call setline(2, "# coding=utf-8")
     call setline(3, "")
 		call SetCommentForScript()
@@ -389,7 +385,6 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  Ctags 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"set tags=~/Development/eclipse/tags
 set autochdir
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -522,7 +517,7 @@ setlocal indentexpr=GetGooglePythonIndent(v:lnum)
 
 let s:maxoff = 50 " maximum number of lines to look backwards.
 
-function GetGooglePythonIndent(lnum)
+function! GetGooglePythonIndent(lnum)
 
   " Indent inside parens.
   " Align with the open paren unless it is at the end of the line.
