@@ -7,12 +7,14 @@
 
 
 set USAGE "
-Usage: $argv0 ip password
+Usage: $argv0 ip username password port
 
 Deploy your SSH Public Key to another node.
 
 ip                  the IP or hostname of target node
+username            username of each node
 password            the password of target node
+port                ssh port of target node. (default to 22)
 
 "
 
@@ -24,11 +26,19 @@ if {$argc < 2} {
 
 
 set ip [lindex $argv 0]
-set password [lindex $argv 1]
+set username [lindex $argv 1]
+set password [lindex $argv 2]
+
+if {$argc == 3} {
+	set port 22
+} elseif {$argc == 4} {
+    set port [lindex $argv 3]
+}
+
 set timeout 60
 
 
-spawn ssh-copy-id root@$ip
+spawn ssh-copy-id -p $port $username@$ip
 expect {
 	"(yes/no)?" {
 		send "yes\r"
