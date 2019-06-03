@@ -211,7 +211,7 @@ endfunc
 
 
 func! SetTitle()
-	if &filetype == 'make' || expand("%:e") == "mk"
+	if expand("%:t") == "Makefile" || &filetype == 'make' || expand("%:e") == "mk"
 		call setline(1, "") 
 		call setline(2, "")
     call setline(3, "")
