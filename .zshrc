@@ -64,7 +64,7 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git colored-man-pages cp extract z zsh-autosuggestions pip autojump \
-  docker golang
+  docker golang kubectl
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -102,7 +102,7 @@ export PS4='+{$LINENO:${FUNCNAME[0]}} '
 export http_proxy="http://127.0.0.1:8123"
 export https_proxy="http://127.0.0.1:8123"
 export all_proxy="http://127.0.0.1:8123"
-export no_proxy="localhost,127.0.0.1"
+export no_proxy="localhost,127.0.0.1,10.219.51.9"
 
 # alias
 alias ll="ls -lh --group-directories-first --sort=extension"
@@ -165,7 +165,7 @@ export FLUTTER_HOME=~/Develop/flutter
 export PATH=$FLUTTER_HOME/bin:$PATH
 
 # Go
-export GOROOT=/usr/local/lib/go/go-1.12.3
+export GOROOT=/usr/local/lib/go/go-1.12.5
 export GOPATH=~/Develop/Go
 export GOPROXY=https://proxy.golang.org
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
@@ -176,6 +176,9 @@ export PATH=~/.cargo/bin:$PATH
 
 # ProtoBuf
 export PATH=/usr/local/lib/protobuf/bin:$PATH
+
+# krew
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # pip zsh completion start
 function _pip_completion {
