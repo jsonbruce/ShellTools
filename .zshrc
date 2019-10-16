@@ -64,7 +64,7 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git colored-man-pages cp extract z zsh-autosuggestions pip autojump \
-  docker golang kubectl
+  docker golang kubectl helm npm npx yarn mvn
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -99,10 +99,10 @@ source $ZSH/oh-my-zsh.sh
 export PS4='+{$LINENO:${FUNCNAME[0]}} '
 
 # proxy
-export http_proxy="http://127.0.0.1:8123"
-export https_proxy="http://127.0.0.1:8123"
-export all_proxy="http://127.0.0.1:8123"
-export no_proxy="localhost,127.0.0.1,10.219.51.9"
+#export http_proxy="http://127.0.0.1:8123"
+#export https_proxy="http://127.0.0.1:8123"
+#export all_proxy="http://127.0.0.1:8123"
+#export no_proxy="localhost,127.0.0.1,kubernetes.msdi.cn,code.msdi.cn"
 
 # alias
 alias ll="ls -lh --group-directories-first --sort=extension"
@@ -126,48 +126,44 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx" 
 
 
+# CUDA
+export PATH=/usr/local/lib/cuda-9.0/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/lib/cuda-9.0/lib64:/usr/local/lib/cuda-9.0/extras/CUPTI/lib64:$LD_LIBRARY_PATH
+
+# Maven
+export MAVEN_HOME=/usr/local/lib/maven/apache-maven-3.6.2
+export PATH=$MAVEN_HOME/bin:$PATH
+
+# Gradle
+export GRADLE_HOME=/usr/local/lib/gradle/gradle-5.6.2
+export PATH=$GRADLE_HOME/bin:$PATH
+
 # Java
 export JAVA_HOME=/usr/local/lib/java/jdk1.8.0_181
-export JRE_HOME=${JAVA_HOME}/jre
-export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+#export JRE_HOME=${JAVA_HOME}/jre
+#export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
 export PATH=${JAVA_HOME}/bin:$PATH
 
 # Kotlin
 export KOTLIN_HOME=/usr/local/lib/kotlin/kotlinc
 export PATH=$KOTLIN_HOME/bin:$PATH
 
-# Nodejs
-export NODEJS_HOME=/usr/local/lib/nodejs/node-v10.15.3
-export PATH=$NODEJS_HOME/bin:$PATH
-
-# Maven
-export MAVEN_HOME=/usr/local/lib/maven/apache-maven-3.5.4
-export PATH=$MAVEN_HOME/bin:$PATH
-
-# Gradle
-export GRADLE_HOME=/usr/local/lib/gradle/gradle-4.9
-export PATH=$GRADLE_HOME/bin:$PATH
-
 # Android
 export ANDROID_HOME=~/Develop/Android/Sdk
 export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH
 
-# CUDA
-export PATH=/usr/local/lib/cuda-9.0/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/lib/cuda-9.0/lib64:/usr/local/lib/cuda-9.0/extras/CUPTI/lib64:$LD_LIBRARY_PATH
-
-# Julia
-export PATH=/usr/local/lib/julia/julia-1.0.0/bin:$PATH
-
+# Nodejs
+export NODEJS_HOME=/usr/local/lib/nodejs/node-v10.16.3
+export PATH=$NODEJS_HOME/bin:$PATH
 
 # Flutter
 export FLUTTER_HOME=~/Develop/flutter
 export PATH=$FLUTTER_HOME/bin:$PATH
 
 # Go
-export GOROOT=/usr/local/lib/go/go-1.12.5
+export GOROOT=/usr/local/lib/go/go-1.13.1
 export GOPATH=~/Develop/Go
-export GOPROXY=https://proxy.golang.org
+export GOPROXY=https://goproxy.cn,https://goproxy.io,https://proxy.golang.org,direct
 export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 export GO111MODULE=auto
 
@@ -176,6 +172,10 @@ export PATH=~/.cargo/bin:$PATH
 
 # ProtoBuf
 export PATH=/usr/local/lib/protobuf/bin:$PATH
+
+# Julia
+export PATH=/usr/local/lib/julia/julia-1.0.0/bin:$PATH
+
 
 # krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
